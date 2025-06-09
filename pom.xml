@@ -25,6 +25,16 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework</groupId>-->
+<!--            <artifactId>spring-context</artifactId>-->
+<!--            <version>6.2.1</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>io.modelcontextprotocol.sdk</groupId>
+            <artifactId>mcp-spring-webflux</artifactId>
+        </dependency>
         <dependency>
             <groupId>io.modelcontextprotocol.sdk</groupId>
             <artifactId>mcp</artifactId>
@@ -37,38 +47,60 @@
             <version>2.23.1</version>
         </dependency>
     </dependencies>
-<build>
 
-    <plugins>
-        <plugin>
-        <artifactId>maven-dependency-plugin</artifactId>
-        <executions>
-            <execution>
-                <phase>package</phase>
-                <goals>
-                    <goal>copy-dependencies</goal>
-                </goals>
-                <configuration>
-                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                </configuration>
-            </execution>
-        </executions>
-    </plugin>
-<!--        <plugin>-->
-<!--            &lt;!&ndash; Build an executable JAR &ndash;&gt;-->
+    <build>
+        <resources>
+            <resource>
+                <directory>src/scripts</directory>
+                <targetPath>${project.build.directory}</targetPath>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+<!--            <plugin>-->
+<!--                <version>3.6.0</version>-->
+<!--                <artifactId>maven-shade-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>shade</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+<!--                    <plugin>-->
+<!--                        &lt;!&ndash; Build an executable JAR &ndash;&gt;-->
 
-<!--            <artifactId>maven-jar-plugin</artifactId>-->
-<!--            <version>3.4.1</version>-->
-<!--            <configuration>-->
-<!--                <archive>-->
-<!--                    <manifest>-->
-<!--                        <addClasspath>true</addClasspath>-->
-<!--                        <classpathPrefix>lib/</classpathPrefix>-->
-<!--                        <mainClass>org.example.server.Main</mainClass>-->
-<!--                    </manifest>-->
-<!--                </archive>-->
-<!--            </configuration>-->
-<!--        </plugin>-->
-    </plugins>
-</build>
+<!--                        <artifactId>maven-jar-plugin</artifactId>-->
+<!--                        <version>3.4.1</version>-->
+<!--                        <configuration>-->
+<!--                            <archive>-->
+<!--                                <manifest>-->
+<!--                                    <addClasspath>true</addClasspath>-->
+<!--                                    <classpathPrefix>lib/</classpathPrefix>-->
+<!--                                    <mainClass>org.example.server.Main</mainClass>-->
+<!--                                </manifest>-->
+<!--                            </archive>-->
+<!--                        </configuration>-->
+<!--                    </plugin>-->
+        </plugins>
+
+    </build>
 </project>
